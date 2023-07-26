@@ -1,15 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
-import Homepage from './components/Homepage/Homepage';
-import {Movielist, TrendImgscroll} from './components/Homepage/Movielist';
-import { Discover } from './components/Homepage/Discover';
+import Header from './components/Homepage/Header';
+import {TrendImgscroll} from './components/Homepage/Movielist';
+import Footer from './components/Homepage/Footer';
+import Trending from './components/Homepage/Trending/Trending';
+import Recomend from './components/Homepage/Recomend';
 function App() {
   return (
     <div className="App">
-      <Homepage/>
+      <Header/>
       <TrendImgscroll/>
-      <Movielist/>
-      <Discover/>
+      <Trending/>
+      <Recomend/>
+      <Footer/>
     </div>
   );
 }

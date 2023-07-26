@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import {Box,Typography,ButtonGroup,Button,AppBar,TextField,Stack} from '@mui/material'
-function Homepage()
+function Header()
 {
     return(
         <Box>
@@ -19,4 +18,4 @@ function Homepage()
       </Box>
     )
 }
-export default Homepage;
+export default Header;
