@@ -1,7 +1,6 @@
 import { useState,useEffect} from 'react';
-import {Box,Typography,Stack,Avatar,Button,Rating,Card,CardMedia,Tooltip} from '@mui/material'
+import {Box,Typography,Button,Rating,Card,CardMedia} from '@mui/material'
 import { fetchDataFromApi} from './data2';
-import { Link } from 'react-router-dom';
 import './Trending.css'
 import CloseIcon from '@mui/icons-material/Close';
 function TrendImgscroll(data,setData){
@@ -22,8 +21,8 @@ console.log(typeof(rating))
 let name = data.title;
 if(name == undefined){name = data.name;}
 else{name = data.title}
-const [isButtonClicked, setIsButtonClicked] = useState(false);
 const img = "https://image.tmdb.org/t/p/original"+data.backdrop_path;
+const [isButtonClicked, setIsButtonClicked] = useState(false);
 const handleThrillerDisplay = () => setIsButtonClicked(true);
 if (isButtonClicked) {return <GetTriller data={data}/>;}
 
@@ -37,7 +36,7 @@ if (isButtonClicked) {return <GetTriller data={data}/>;}
                 image={img}
                 sx={{filter: 'brightness(40%)'}}
             />
-            <Rating sx={{position: 'relative',bottom: '260px',left: '3%',color: 'white'}}size='large' defaultValue = {data.vote_average} precision={0.5} max={10} readOnly />
+            <Typography sx={{position: 'relative',bottom: '220px',left: '3%',color: 'white',width:'90%'}}>{data.overview}</Typography>
             <Typography variant='h3'
              sx={{
                 position: 'relative',
@@ -51,7 +50,7 @@ if (isButtonClicked) {return <GetTriller data={data}/>;}
             <Button onClick={handleThrillerDisplay} variant='contained'size='large'
             sx={{
                 position: 'relative',
-                bottom: '290px',
+                bottom: '250px',
                 left: '3%',
                 color: 'white'
             }}>Watch Triller</Button>
@@ -91,4 +90,4 @@ return(
       </Box>
 )}
 
-export  {TrendImgscroll};
+export  {TrendImgscroll,GetTriller};

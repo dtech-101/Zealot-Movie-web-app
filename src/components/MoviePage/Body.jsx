@@ -1,9 +1,8 @@
-import {Box,Typography,Stack,Avatar,Button,Rating,Card,CardMedia} from '@mui/material'
+import {Box,Typography,Stack,Tooltip,Button,Rating,Card,CardMedia} from '@mui/material'
 import {fetchDataFromApi} from '../Homepage/data2';
 import { useState,useEffect} from 'react';
+import './Body.css'
 import CloseIcon from '@mui/icons-material/Close';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 function Body(){
 const [data, setData] = useState([]);
 const [datalist,setdatalist] = useState([])
@@ -34,13 +33,16 @@ const Popular =()=>fetchData(`https://api.themoviedb.org/3/movie/popular`)
 const Toprated =()=>fetchData(`https://api.themoviedb.org/3/movie/top_rated`)
 const Upcoming =()=>fetchData(`https://api.themoviedb.org/3/movie/upcoming`)
 const Discover =()=>fetchData(`https://api.themoviedb.org/3/discover/movie`)
-const [isButtonClicked, setIsButtonClicked] = useState(false);
 const img = "https://image.tmdb.org/t/p/original"+data.backdrop_path;
+const [isButtonClicked, setIsButtonClicked] = useState(false);
+const [isButtonClicked2, setIsButtonClicked2] = useState(false);
 const handleClick = () => {setIsButtonClicked(true);};
 if (isButtonClicked) {return <GetTriller data={data}/>;}
+const handleThrillerDisplay = () => setIsButtonClicked2(true);
+if (isButtonClicked2) {alert("functionality is under development")}
 return(
     <Box sx={{p: '1px',height:'80px',width: '100%',position: 'relative'}}>
-        <Stack direction={'row'} gap={2}sx={{mt: 1,ml: 25,mb: 2}}>
+        <Stack direction={'row'} gap={2}sx={{mt: 1,ml: 17,mb: 2}}>
             <Button variant='contained'sx={{p: 2,width: 200,color: 'secondry.main'}} onClick={NowPlaying}>Now Playing</Button>
             <Button variant='contained'sx={{p: 2,width: 200,color: 'secondry.main'}} onClick={Popular}>Popular</Button>
             <Button variant='contained'sx={{p: 2,width: 200,color: 'secondry.main'}} onClick={Toprated}>Top Rated</Button>
@@ -54,7 +56,7 @@ return(
             height= '600px'
             image={img}
             sx={{filter: 'brightness(40%)'}}/>
-            <Rating sx={{position: 'relative',bottom: '260px',left: '3%',color: 'white'}}size='large' defaultValue = {data.vote_average} precision={0.5} max={10} readOnly />
+             <Typography sx={{position: 'relative',bottom: '220px',left: '3%',color: 'white',width:'90%'}}>{data.overview}</Typography>
             <Typography variant='h3'
              sx={{
                 position: 'relative',
@@ -68,18 +70,22 @@ return(
             <Button onClick={handleClick} variant='contained'size='large'
             sx={{
                 position: 'relative',
-                bottom: '290px',
+                bottom: '250px',
                 left: '3%',
                 color: 'white'}}>Watch Triller</Button>
         </Card>
-        <Stack direction={'row'}gap={2}sx={{overflow: 'scroll',mt: 3}}>
-            {
-                datalist.map(item=>(
-                <Stack> 
-                    <img src={"https://image.tmdb.org/t/p/original"+item.poster_path} width={200}/>
-                    <Typography sx={{fontSize: 17,textAlign: 'center'}}>{item.title}</Typography>
-                </Stack>
-                ))}
+        <Stack direction={'row'}gap={2}sx={{overflow: 'scroll',mt: 3,}} className='movielistscroll'>
+        { datalist.map((item)=>{
+            const tool = {
+            overview: item.overview
+            }
+            return(
+            <Tooltip  title={Object.values(tool)}>
+            <Stack key={item.id}>
+            <img src={"https://image.tmdb.org/t/p/original" + item.poster_path} width={200} style={{borderRadius:'5px'}} onClick={handleThrillerDisplay}/>
+            <Typography variant='p'textAlign='center' fontFamily={'cursive'}>{item.title}</Typography>
+            </Stack></Tooltip>  
+)})}
         </Stack>
         </Box>
 )}

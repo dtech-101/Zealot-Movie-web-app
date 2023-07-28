@@ -1,6 +1,7 @@
 import {Box,Typography,Stack,Button,Tooltip} from '@mui/material'
 import { useState,useEffect} from 'react';
 import {fetchDataFromApi} from './data2';
+import CloseIcon from '@mui/icons-material/Close';
 function Trending(){ 
 const [data,setdata] = useState([])
 useEffect(() => {
@@ -22,6 +23,9 @@ Weeklytrends()
 } catch (error) {
 // Handle errors here
 }};
+const [isButtonClicked, setIsButtonClicked] = useState(false);
+const handleThrillerDisplay = () => setIsButtonClicked(true);
+if (isButtonClicked) {alert("functionality is under development")}
 return(
 <Box>
   <Stack direction={'row'} sx={{p:3}}gap={2}>
@@ -32,13 +36,17 @@ return(
     </div>
     </Stack>    
     <Stack direction="row" gap={2}sx={{p:2}} style={{overflow:'scroll'}} className='movielistscroll'>
-    { data.map((item)=>(
+    { data.map((item)=>{
+        const tool = {
+          overview: item.overview
+        }
+      return(
       <Stack key={item.id}>
-      <Tooltip title={item.title}>
-        <img src={"https://image.tmdb.org/t/p/original" + item.poster_path} width={200} style={{borderRadius:'5px'}}/>
+      <Tooltip  title={Object.values(tool)}>
+        <img src={"https://image.tmdb.org/t/p/original" + item.poster_path} width={200} style={{borderRadius:'5px'}} onClick={handleThrillerDisplay}/>
         <Typography variant='p'textAlign='center' fontFamily={'cursive'}>{item.title}</Typography>
       </Tooltip>
-    </Stack>))}
+    </Stack>)})}
   </Stack>
 </Box>)}
 
@@ -65,4 +73,37 @@ const Weeklytrends = () =>{
     recondationBtn.disabled = true; 
     console.log("2")
 }
+
+const GetTriller = (props)=>{
+  const {data} = props;
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [embedUrl,setembedUrl] = useState(`https://www.youtube.com/embed/${""}`)
+  useEffect(() => {
+  fetchThrillerData();
+  }, []);
+  const fetchThrillerData = async () => {
+  try{
+  const response = await fetchDataFromApi(`https://api.themoviedb.org/3/movie/${data.id}/videos`);
+  setembedUrl(`https://www.youtube.com/embed/${response.results[0].key}`)
+  } catch (error) {
+  // Handle errors here
+  }};
+  const handleClick = () => setIsButtonClicked(true);
+  if (isButtonClicked) {return <Trending/>;}
+  return(
+      <Box>
+          <Button variant="contained" onClick={handleClick} sx={{color: '#ffffff',position: 'relative',top: 50,left: '95%'}}><CloseIcon/></Button>
+      <iframe
+          width="100%"
+          height="600px"
+          src={embedUrl}
+          title="YouTube Video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          id='thriller'
+        ></iframe>
+        </Box>
+  )}
+  
 export default Trending;

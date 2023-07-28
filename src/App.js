@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.css';
 import Main from './components/Homepage/main';
 import MoviePage from './components/MoviePage/main';
 import Tvseriespage from './components/TvSeriespage/main';
