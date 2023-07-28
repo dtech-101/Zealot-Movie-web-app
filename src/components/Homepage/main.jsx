@@ -1,7 +1,7 @@
 import Header from '../Homepage/Header';
 import {TrendImgscroll} from '../Homepage/Movielist';
 import Footer from '../Homepage/Footer';
-import Trending from './Trending/Trending';
+import Trending from './Trending';
 import Recomend from '../Homepage/Recomend';
 function Main() {
   return (

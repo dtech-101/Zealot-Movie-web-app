@@ -1,48 +1,34 @@
-import {Box,Typography,Stack,Avatar,Button,Rating,Card,CardMedia} from '@mui/material'
-import { fetchDataFromApi,GetTrillerData } from './data2';
 import { useState,useEffect} from 'react';
-import './Trending/Trending.css'
+import {Box,Typography,Stack,Avatar,Button,Rating,Card,CardMedia,Tooltip} from '@mui/material'
+import { fetchDataFromApi} from './data2';
+import { Link } from 'react-router-dom';
+import './Trending.css'
 import CloseIcon from '@mui/icons-material/Close';
+function TrendImgscroll(data,setData){
+[data, setData] = useState([]);
+useEffect(() => {
+fetchData();
+}, []);
+const fetchData = async () => {
+try{
+const response = await fetchDataFromApi('https://api.themoviedb.org/3/trending/all/day')
+const rand = Math.floor(Math.random() * response.results.length);
+setData(response.results[rand]);
+} catch (error) {
+// Handle errors here
+}};
+const rating = data.vote_average;
+console.log(typeof(rating))
+let name = data.title;
+if(name == undefined){name = data.name;}
+else{name = data.title}
+const [isButtonClicked, setIsButtonClicked] = useState(false);
+const img = "https://image.tmdb.org/t/p/original"+data.backdrop_path;
+const handleThrillerDisplay = () => setIsButtonClicked(true);
+if (isButtonClicked) {return <GetTriller data={data}/>;}
 
-function TrendImgscroll(){
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetchData();
-  }, []);
-  const fetchData = async () => {
-  try{
-    const response = await fetchDataFromApi();
-    const rand = Math.floor(Math.random() * response.results.length);
-    setData(response.results[rand]);
-  } catch (error) {
-    // Handle errors here
-  }};
-  const rating = data.vote_average;
-  console.log(typeof(rating))
-    let name = data.title;
-    if(name == undefined)
-    {
-        name = data.name;
-    }
-    else{
-      name = data.title
-    }
-
-  const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const img = "https://image.tmdb.org/t/p/original"+data.backdrop_path;
-    
-
-
-  
-    const handleClick = () => {
-        setIsButtonClicked(true);
-      };
-
-      if (isButtonClicked) {
-        return <GetTriller data={data}/>;
-      }
     return(
-        <Box sx={{mt:7.5}}>
+        <Box>
             <Card sx={{maxHeight: 600}} id='card'>
              <CardMedia
                 component="img"
@@ -62,7 +48,7 @@ function TrendImgscroll(){
                 }}>
                 {name}
             </Typography> 
-            <Button onClick={handleClick} variant='contained'size='large'
+            <Button onClick={handleThrillerDisplay} variant='contained'size='large'
             sx={{
                 position: 'relative',
                 bottom: '290px',
@@ -71,40 +57,26 @@ function TrendImgscroll(){
             }}>Watch Triller</Button>
             </Card>
         </Box>
-    );
-    
-}
+)}
+
 const GetTriller = (props)=>{
-  const {data} = props;
-      const [isButtonClicked, setIsButtonClicked] = useState(false);
-      const [embedUrl,setembedUrl] = useState(`https://www.youtube.com/embed/${""}`)
-
-
-      useEffect(() => {
-        fetchThrillerData();
-      }, []);
-      const fetchThrillerData = async () => {
-      try{
-        const response = await GetTrillerData(data.id);
-        setembedUrl(`https://www.youtube.com/embed/${response.results[0].key}`)
-       
-      } catch (error) {
-        // Handle errors here
-      }};
-
-
-
-
-    const handleClick = () => {
-        setIsButtonClicked(true);
-      };
-
-      if (isButtonClicked) {
-        return <TrendImgscroll/>;
-      }
-
-    return(
-        <Box>
+const {data} = props;
+const [isButtonClicked, setIsButtonClicked] = useState(false);
+const [embedUrl,setembedUrl] = useState(`https://www.youtube.com/embed/${""}`)
+useEffect(() => {
+fetchThrillerData();
+}, []);
+const fetchThrillerData = async () => {
+try{
+const response = await fetchDataFromApi(`https://api.themoviedb.org/3/movie/${data.id}/videos`);
+setembedUrl(`https://www.youtube.com/embed/${response.results[0].key}`)
+} catch (error) {
+// Handle errors here
+}};
+const handleClick = () => setIsButtonClicked(true);
+if (isButtonClicked) {return <TrendImgscroll/>;}
+return(
+    <Box>
         <Button variant="contained" onClick={handleClick} sx={{color: '#ffffff',position: 'relative',top: 50,left: '95%'}}><CloseIcon/></Button>
     <iframe
         width="100%"
@@ -117,8 +89,6 @@ const GetTriller = (props)=>{
         id='thriller'
       ></iframe>
       </Box>
-    )
-}
-
+)}
 
 export  {TrendImgscroll};
