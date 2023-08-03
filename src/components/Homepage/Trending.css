@@ -1,39 +1,9 @@
-.container{
-    border: solid 1px black;
-    border-radius: 100px;
-    width: auto;
-    padding: 3px;
-}
-#button1{
-    border-radius: 50px;
-    background: #F57C51;
-    color: #ffffff;
-    margin-right: 5px;
-    transition: 0.5s;
-}
-#button2{
-    border-radius: 50px;
-    background: #F57C51;
-    color: #F57C51;
-    transition: 0.5s;
-    background: transparent;
-
-}
-.movielistscroll::-webkit-scrollbar{
-    width: 1px;
-    height: 8px;
-  }
-  .movielistscroll::-webkit-scrollbar-thumb{
-    background: #F57C51;
-    border-radius: 5px;
-  }
-  ::-webkit-scrollbar{
-    width: 1px;
-    height: 6px;
-  }
-  ::-webkit-scrollbar-thumb{
-  }
-
-  #thriller{
+#thriller{
     margin-top: 50px;
+  }
+  .contain:Hover{
+    filter: brightness(40%);
+    transition: 0.2s;
+    scale: 1.05;
+    cursor: pointer;
   }

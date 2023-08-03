@@ -1,9 +1,9 @@
-import {Box,Typography,Stack,Tooltip,Rating,Button} from '@mui/material'
+import {Box,Typography,Stack,Tooltip,Rating, Button} from '@mui/material'
 import { useState,useEffect} from 'react';
 import {fetchDataFromApi} from './data2';
 import './Recomend.css'
 import { Link } from 'react-router-dom';
-function Recomend(){
+function Upcoming(){
 const [data,setdata] = useState([])
 const newList = []
 let count = 0;
@@ -12,7 +12,7 @@ getData();
 }, []);
 const getData = async () => {
 try{
-const response = await fetchDataFromApi('https://api.themoviedb.org/3/movie/top_rated');
+const response = await fetchDataFromApi('https://api.themoviedb.org/3/movie/upcoming');
 setdata(response.results);
 } catch (error) {
  // Handle errors here
@@ -27,9 +27,9 @@ for (const value of Object.values(data)) {
     }
   }
 return(
-    <Box  sx={{p:5}}>  
+    <Box  sx={{p:5}}> 
     <Stack direction={'row'} justifyContent={'space-between'}> 
-        <Typography variant='h5' sx={{mb: 3,fontWeight: 'bold',color: 'secondry.main'}}>Top Rated Movies</Typography>
+        <Typography variant='h5' sx={{mb: 3,fontWeight: 'bold',color: 'secondry.main'}}>Upcoming Movies</Typography>
         <Link to='/movies'><Button>see more</Button></Link>
     </Stack>
     <Stack direction="row" gap={2} justifyContent={'center'}style={{overflow:'hidden'}} className='movielistscroll'>
@@ -51,4 +51,4 @@ return(
     </Stack>
 </Box>
 )}
-export default Recomend;
+export default Upcoming;

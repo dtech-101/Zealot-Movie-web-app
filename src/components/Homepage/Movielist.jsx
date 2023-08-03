@@ -1,7 +1,7 @@
 import { useState,useEffect} from 'react';
 import {Box,Typography,Button,Rating,Card,CardMedia} from '@mui/material'
 import { fetchDataFromApi} from './data2';
-import './Trending.css'
+import './Billboard.css'
 import CloseIcon from '@mui/icons-material/Close';
 function TrendImgscroll(data,setData){
 [data, setData] = useState([]);
@@ -28,16 +28,18 @@ if (isButtonClicked) {return <GetTriller data={data}/>;}
 
     return(
         <Box>
-            <Card sx={{maxHeight: 600}} id='card'>
+            <Card sx={{maxHeight:'600px'}} id='card'>
              <CardMedia
                 component="img"
                 alt="green iguana"
                 height= '600px'
                 image={img}
-                sx={{filter: 'brightness(40%)'}}
+                sx={{filter: 'brightness(40%)',
+                
+            }}
             />
             <Typography sx={{position: 'relative',bottom: '220px',left: '3%',color: 'white',width:'90%'}}>{data.overview}</Typography>
-            <Typography variant='h3'
+            <Typography variant='h3' className='name'
              sx={{
                 position: 'relative',
                 bottom: '370px',
