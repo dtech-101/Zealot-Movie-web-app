@@ -27,9 +27,9 @@ for (const value of Object.values(data)) {
     }
   }
 return(
-    <Box  sx={{p:5}}> 
+    <Box  sx={{p:2}}> 
     <Stack direction={'row'} justifyContent={'space-between'}> 
-        <Typography variant='h5' sx={{mb: 3,fontWeight: 'bold',color: 'secondry.main'}}>Upcoming Movies</Typography>
+        <Typography variant='h5' sx={{ml:2,mb: 3,fontWeight: 'bold',color: 'secondry.main'}}>Upcoming Movies</Typography>
         <Link to='/movies'><Button>see more</Button></Link>
     </Stack>
     <Stack direction="row" gap={2} justifyContent={'center'}style={{overflow:'hidden'}} className='movielistscroll'>

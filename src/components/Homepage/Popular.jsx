@@ -1,9 +1,9 @@
-import {Box,Typography,Stack,Rating,Button,Tooltip} from '@mui/material'
+import {Box,Typography,Stack,Tooltip,Rating, Button} from '@mui/material'
 import { useState,useEffect} from 'react';
 import {fetchDataFromApi} from './data2';
+import './Recomend.css'
 import { Link } from 'react-router-dom';
-import './Trending.css'
-function Trending(){ 
+function Popular(){
 const [data,setdata] = useState([])
 const newList = []
 let count = 0;
@@ -12,35 +12,25 @@ getData();
 }, []);
 const getData = async () => {
 try{
-const response = await fetchDataFromApi('https://api.themoviedb.org/3/trending/tv/day');
+const response = await fetchDataFromApi('https://api.themoviedb.org/3/movie/popular');
 setdata(response.results);
 } catch (error) {
-// Handle errors here
+ // Handle errors here
 }};
-const getDataweek = async () => {
-try{
-const response = await fetchDataFromApi('https://api.themoviedb.org/3/trending/tv/week');
-setdata(response.results);
-} catch (error) {
-// Handle errors here
-}};
-
 
 for (const value of Object.values(data)) {
-  newList.push(value);
-  count++;
-
-  if (count >= 5) {
-    break;
+    newList.push(value);
+    count++;
+  
+    if (count >= 5) {
+      break;
+    }
   }
-}
-
-console.log("newadata"+ newList)
 return(
-<Box  sx={{mt: 5,p:2}}>
-<Stack direction={'row'} justifyContent={'space-between'}> 
-        <Typography variant='h5' sx={{ml:2,mb: 3,fontWeight: 'bold',color: 'secondry.main'}}>TRending series</Typography>
-        <Link to='/tv'><Button>see more</Button></Link>
+    <Box  sx={{p:2}}> 
+    <Stack direction={'row'} justifyContent={'space-between'}> 
+        <Typography variant='h5' sx={{ml:2,mb: 3,fontWeight: 'bold',color: 'secondry.main'}}>Popular Movies</Typography>
+        <Link to='/movies'><Button>see more</Button></Link>
     </Stack>
     <Stack direction="row" gap={2} justifyContent={'center'}style={{overflow:'hidden'}} className='movielistscroll'>
     { newList.map((item)=>(
@@ -61,5 +51,4 @@ return(
     </Stack>
 </Box>
 )}
-  
-export default Trending;
+export default Popular;

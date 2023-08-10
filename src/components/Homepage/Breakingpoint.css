@@ -1,0 +1,15 @@
+.glowing-cursor {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, white 10%, transparent 50%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+  .flashlight{
+    transform: rotate(50deg);
+    transform: rotateY(-180deg);
+    padding: 150px;
+  }

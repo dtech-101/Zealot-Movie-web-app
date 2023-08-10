@@ -1,7 +1,6 @@
 import { useState,useEffect} from 'react';
 import {Box,Typography,Button,Rating,Card,CardMedia} from '@mui/material'
 import { fetchDataFromApi} from './data2';
-import './Billboard.css'
 import CloseIcon from '@mui/icons-material/Close';
 function TrendImgscroll(data,setData){
 [data, setData] = useState([]);
@@ -49,7 +48,7 @@ if (isButtonClicked) {return <GetTriller data={data}/>;}
                 }}>
                 {name}
             </Typography> 
-            <Button onClick={handleThrillerDisplay} variant='contained'size='large'
+            <Button  onClick={handleThrillerDisplay} variant='contained'size='large'
             sx={{
                 position: 'relative',
                 bottom: '250px',
@@ -78,7 +77,7 @@ const handleClick = () => setIsButtonClicked(true);
 if (isButtonClicked) {return <TrendImgscroll/>;}
 return(
     <Box>
-        <Button variant="contained" onClick={handleClick} sx={{color: '#ffffff',position: 'relative',top: 50,left: '95%'}}><CloseIcon/></Button>
+        <Button variant="contained" onClick={handleClick} sx={{background: 'primary.main',position: 'relative',top: 50,left: '95%'}}><CloseIcon/></Button>
     <iframe
         width="100%"
         height="600px"

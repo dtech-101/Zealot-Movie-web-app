@@ -1,8 +1,4 @@
-.movielistscroll::-webkit-scrollbar{
-    width: 1px;
-    height: 8px;
-  }
-  .movielistscroll::-webkit-scrollbar-thumb{
-    background: #F57C51;
-    border-radius: 5px;
+.movielistscroll{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }

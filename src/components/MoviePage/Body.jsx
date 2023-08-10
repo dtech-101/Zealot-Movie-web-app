@@ -1,11 +1,14 @@
-import {Box,Typography,Stack,Tooltip,Button,Rating,Card,CardMedia} from '@mui/material'
+import {Box,Typography,Stack,Tooltip,Button,Rating,Grid,Card,CardMedia} from '@mui/material'
 import {fetchDataFromApi} from '../Homepage/data2';
 import { useState,useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import './Body.css'
 import CloseIcon from '@mui/icons-material/Close';
 function Body(){
 const [data, setData] = useState([]);
 const [datalist,setdatalist] = useState([])
+const newList = [];
+let  count = 0;
 useEffect(() => {
 fetchData(`https://api.themoviedb.org/3/movie/now_playing`);
 }, []);
@@ -18,8 +21,14 @@ setdatalist(response.results)
 } catch (error) {
 // Handle errors here
 }};
-const rating = data.vote_average;
-console.log(typeof(rating))
+for (const value of Object.values(datalist)) {
+    newList.push(value);
+    count++;
+  
+    if (count >= 5) {
+      break;
+    }
+  }
 let name = data.title;
 if(name == undefined)
 {
@@ -41,14 +50,15 @@ if (isButtonClicked) {return <GetTriller data={data}/>;}
 const handleThrillerDisplay = () => setIsButtonClicked2(true);
 if (isButtonClicked2) {alert("functionality is under development")}
 return(
-    <Box sx={{p: '1px',height:'80px',width: '100%',position: 'relative'}}>
-        <Stack direction={'row'} gap={2}sx={{mt: 1,ml: 17,mb: 2}}>
-            <Button variant='contained'sx={{p: 2,width: 200,color: 'secondry.main'}} onClick={NowPlaying}>Now Playing</Button>
-            <Button variant='contained'sx={{p: 2,width: 200,color: 'secondry.main'}} onClick={Popular}>Popular</Button>
-            <Button variant='contained'sx={{p: 2,width: 200,color: 'secondry.main'}} onClick={Toprated}>Top Rated</Button>
-            <Button variant='contained'sx={{p: 2,width: 200,color: 'secondry.main'}} onClick={Upcoming}>Upcoming</Button>
-            <Button variant='contained'sx={{p: 2,width: 200,color: 'secondry.main'}} onClick={Discover}>Discover</Button>
+    <Stack direction={'row'}>
+        <Stack direction={'column'} gap={2} sx={{mt: -0.5,p:2,pt: 5,backgroundColor: '#533E2D',position:'fixed',zIndex: 1,height:'100%'}}>
+            <Button variant='text'sx={{width: '100%',fontSize:'15px',color: 'secondry.main'}} onClick={Popular}>Popular</Button>
+            <Button variant='text'sx={{width: '100%',fontSize:'15px',color: 'secondry.main'}} onClick={Toprated}>Top Rated</Button>
+            <Button variant='text'sx={{width: '100%',fontSize:'15px',color: 'secondry.main'}} onClick={Upcoming}>Upcoming</Button>
+            <Button variant='text'sx={{width: '100%',fontSize:'15px',color: 'secondry.main'}} onClick={NowPlaying}>Now Playing</Button>
+            <Button variant='text'sx={{width: '100%',fontSize:'15px',color: 'secondry.main'}} onClick={Discover}>Discover</Button>
         </Stack>
+        <Stack sx={{mt:-0.5,ml: 19,width:'100%'}} className="moviepage">
         <Card sx={{maxHeight: 600}} id='card'>
             <CardMedia
             component="img"
@@ -74,20 +84,25 @@ return(
                 left: '3%',
                 color: 'white'}}>Watch Triller</Button>
         </Card>
-        <Stack direction={'row'}gap={2}sx={{overflow: 'scroll',mt: 3,}} className='movielistscroll'>
-        { datalist.map((item)=>{
-            const tool = {
-            overview: item.overview
-            }
-            return(
-            <Tooltip  title={Object.values(tool)}>
-            <Stack key={item.id}>
-            <img src={"https://image.tmdb.org/t/p/original" + item.poster_path} width={200} style={{borderRadius:'5px'}} onClick={handleThrillerDisplay}/>
-            <Typography variant='p'textAlign='center' fontFamily={'cursive'}>{item.title}</Typography>
-            </Stack></Tooltip>  
-)})}
+        <Grid sx={{mt:2,ml:6.5}} className='movielistscroll'>
+    { datalist.map((item)=>(
+        <Stack className='contain'>
+        <Tooltip title={item.overview}>
+        <Link to={{ pathname: '/searchpage', state: { userId: item.id} }}> <img className='posterId' src={"https://image.tmdb.org/t/p/original" + item.poster_path}width={260} style={{
+          borderRadius: '5px'
+        }}/></Link>
+        </Tooltip>
+        <Typography sx={{
+          position: 'relative',
+          bottom: '88%',
+          left: '66%',
+          backgroundColor: '#faaf00',
+          width: '70px',
+        }}><Rating name="read-only" value={1} max={1}readOnly sx={{color: 'black'}} />{item.vote_average}</Typography>
+    </Stack>))}
+    </Grid>
+        </Stack>   
         </Stack>
-        </Box>
 )}
 
 const GetTriller = (props)=>{

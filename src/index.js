@@ -7,14 +7,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const  theme = createTheme({
   palette:{
     primary:{
-      main: '#4260dc',
+      main: '#A27035',
     },
     secondry:{
       main: '#fff'
     }
   },
   typography:{
-    fontFamily: 'cursive'
+    fontFamily: 'poppins'
   }
 })
 root.render(

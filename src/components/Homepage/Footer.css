@@ -1,0 +1,19 @@
+.footer {
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+    box-shadow: 2px -2px 10px black;
+  }
+
+  /* Style for the footer links */
+  .footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+  }
+
+  /* Style for the footer links on hover */
+  .footer a:hover {
+    color: #f39c12;
+  }
