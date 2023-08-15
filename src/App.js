@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Route} from 'react-router-dom';
-import { useState,useEffect } from 'react';
-import './App.css'
-import Main from './components/Homepage/main';
-import MoviePage from './components/MoviePage/main';
-import Tvseriespage from './components/TvSeriespage/main';
-import SearchPage from './components/SearchPage';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import "./App.css";
+import MoviePage from "./components/MoviePage";
+import SearchPage from "./components/SearchPage";
+import Layout from "./layouts";
+import TvSeriespage from "./components/TvSeriespage";
+import HomePage from "./components/Homepage";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,12 +20,14 @@ function App() {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-      <Router>
-        <Route path="/" component={Main} exact/>
-        <Route exact path="/movies" component={MoviePage} />
-        <Route exact path="/tv" component={Tvseriespage} />
-        <Route path="/searchpage" component={SearchPage} />
-      </Router>
+        <Router>
+          <Layout>
+            <Route path="/" component={HomePage} exact />
+            <Route exact path="/movies" component={MoviePage} />
+            <Route exact path="/tv" component={TvSeriespage} />
+            <Route path="/searchpage" component={SearchPage} />
+          </Layout>
+        </Router>
       )}
     </div>
   );

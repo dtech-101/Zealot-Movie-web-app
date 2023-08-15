@@ -46,17 +46,10 @@ return(
     { newList.map((item)=>(
         <Stack className='contain'>
         <Tooltip title={item.overview}>
-        <Link to={{ pathname: '/searchpage', state: { userId: item.id} }}> <img className='posterId' src={"https://image.tmdb.org/t/p/original" + item.poster_path}width={240} style={{
+        <Link to={{ pathname: '/searchpage', state: { userId: item.id} }}> <img  className="posterId" src={"https://image.tmdb.org/t/p/original" + item.poster_path}width={240} style={{
           borderRadius: '5px'
         }}/></Link>
         </Tooltip>
-        <Typography sx={{
-          position: 'relative',
-          bottom: '88%',
-          left: '71%',
-          backgroundColor: '#faaf00',
-          width: '70px',
-        }}><Rating name="read-only" value={1} max={1}readOnly sx={{color: 'black'}} />{item.vote_average}</Typography>
     </Stack>))}
     </Stack>
 </Box>

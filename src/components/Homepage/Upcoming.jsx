@@ -40,13 +40,6 @@ return(
           borderRadius: '5px'
         }}/></Link>
         </Tooltip>
-        <Typography sx={{
-          position: 'relative',
-          bottom: '88%',
-          left: '71%',
-          backgroundColor: '#faaf00',
-          width: '70px',
-        }}><Rating name="read-only" value={1} max={1}readOnly sx={{color: 'black'}} />{item.vote_average}</Typography>
     </Stack>))}
     </Stack>
 </Box>

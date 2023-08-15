@@ -1,0 +1,59 @@
+@media (max-width: 600px) {
+    .headerGroupBtn{
+      display: none !important;
+    }
+}
+    #headernav{
+  display: none;
+}
+#bugermenu{
+  display: none;
+}
+@media (max-width: 900px) {
+   .sitename{
+    margin-left: 20% !important;
+   }   
+   .headerGroupBtn{
+      display: none !important;
+    }
+    #bugermenu{
+  display: block;
+}
+    #headernav{
+  display: block;
+  position: absolute;
+  right: 0px;
+  top: 36px;
+  width: 20%;
+  height: auto;
+  font-size: 20px;
+  list-style: none;
+  padding: 5px;
+  background-color: #533e2d;
+  transition: 1s;
+}
+#headernav>li{
+  margin-top: 15px;
+  padding: 4px;
+  width: 100%;
+  font-size: 17px;
+  text-align: center;
+}
+#headernav>a>Button{
+  margin-top: 15px;
+  margin-left: 4px;
+  padding: 4px;
+  width: 100%;
+  font-size: 17px;
+}
+.toggle{
+  left: -100%px;
+  visibility: collapse;
+}
+}
+@media (max-width: 400px) {
+    .textfield{
+      width: 200px;
+    }
+}
+

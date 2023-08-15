@@ -1,0 +1,17 @@
+@media (max-width: 600px) {
+    .name {
+      position: relative;
+      bottom: 400px !important;
+      left: 3%;
+      color: white;  
+}
+    .buttongroup{
+        position: relative;
+        bottom: 380px !important;
+        left: 3%;
+        gap: 10px;
+    }
+    .closebtn{
+
+    }
+}

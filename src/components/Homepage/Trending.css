@@ -7,3 +7,21 @@
     scale: 1.05;
     cursor: pointer;
   }
+  @media (max-width: 900px) {
+    .movielistscroll{
+      overflow: scroll !important;
+      justify-content:left !important;
+    }
+  }
+  @media (max-width: 600px) {
+    .movielistscroll{
+      overflow: scroll !important;
+      justify-content:left !important;
+    }
+    .posterId{
+      width: 190px !important;
+    }
+  }
+  @media (max-width: 400px) {
+    
+  }
